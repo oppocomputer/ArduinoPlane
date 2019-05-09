@@ -200,7 +200,6 @@ void loop() {
      if(debug){
       gyroDataInit();
       dataPrintSerial();
-      delay(100);
+      delay(700);
       }
-   }
-        
+}
