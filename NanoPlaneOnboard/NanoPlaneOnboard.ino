@@ -3,7 +3,12 @@
 #include <Servo.h> //Servo's
 #include <Wire.h>
 #include <SPI.h>
-#incl
+#include <nRF24L01.h>
+#include <RF24.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+#include <RF24_config.h>
+
 //Debug Bool Delete to optimize
 bool debug = true;
 
