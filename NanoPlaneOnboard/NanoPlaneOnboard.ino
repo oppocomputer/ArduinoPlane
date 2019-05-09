@@ -44,7 +44,7 @@ int inputPos4 = 512;
 
 
 RF24 radio(10, 9);  
-const byte address[6] = "10101";
+const byte address[6] = "101011";
 const int MPU_addr=0x68;  // I2C address of the MPU-6050
 int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
 unsigned long lastReceiveTime = 0;
@@ -87,6 +87,7 @@ void resetData() {
 }
 
 void checkTimeData(){
+  //THE RECEIVER TIME CHECKER
   if (radio.available()) {
     radio.read(&data, sizeof(Data_Package));
     lastReceiveTime = millis(); 
@@ -135,27 +136,20 @@ void gyroDataInit(){
 }}
 
 void dataPrintSerial(){
-   if(Wire.available()){
-      Serial.print("AcX = "); Serial.print(AcX);
-      Serial.print(" | AcY = "); Serial.print(AcY);
-      Serial.print(" | AcZ = "); Serial.print(AcZ);
-      Serial.print(" | Temperature = "); Serial.print(Tmp/340.00+36.53);  //equation for temperature in degrees C from datasheet
-      Serial.print(" | X = "); Serial.print(GyX);
-      Serial.print(" | Y = "); Serial.print(GyY);
-      Serial.print(" | Z = "); Serial.println(GyZ);
-   } 
+  for (int i = 0; i < 18; i++){
+      Serial.println();
+  }
       Serial.print("Wing Left: ");
       Serial.print(pos1);
-      Serial.println();
+      Serial.print(" | ");
       Serial.print("Wing Right: ");
       Serial.print(pos2);
-      Serial.println();
+      Serial.print(" | ");
       Serial.print("Vertical Stabalizer: ");
       Serial.print(pos3);
-      Serial.println();
+      Serial.print(" | ");
       Serial.print("Horizontal Stabilizer: ");
       Serial.print(pos4);
-      Serial.println();
 }
 
 
@@ -203,8 +197,10 @@ void loop() {
     //Write final data to servo's
     writeFinalData();
     //Debug
-     while(debug){
+     if(debug){
       gyroDataInit();
       dataPrintSerial();
-      }}
+      delay(100);
+      }
+   }
         
