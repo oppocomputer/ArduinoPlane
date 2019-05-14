@@ -154,7 +154,7 @@ void dataPrintSerial(){
 
 
 void setup() {
-  //USB Debug DISABLE WHEN UPLOADING
+  //USB Debug (Testing)
     Serial.begin(9600);
 
   //Receiver
